@@ -39,3 +39,7 @@ func (t *Time) Format(format string) string {
 func (t *Time) String() string {
 	return t.Format(time.RFC3339)
 }
+
+func (t *Time) GetTime() time.Time {
+	return t.Time
+}

@@ -23,7 +23,7 @@ func DeleteUser(opts DeleteUserOptions) error {
 // DeleteUser calls DELETE /users/{userID}
 // https://marketplace.zoom.us/docs/api-reference/zoom-api/users/userdelete
 func (c *Client) DeleteUser(opts DeleteUserOptions) error {
-	return c.requestV2(requestV2Opts{
+	return c.RequestV2(RequestV2Opts{
 		Method:        Delete,
 		Path:          fmt.Sprintf(DeleteUserPath, opts.EmailOrID),
 		URLParameters: &opts,

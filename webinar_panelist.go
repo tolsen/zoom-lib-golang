@@ -29,7 +29,7 @@ func GetWebinarPanelists(webinarID int) (GetWebinarPanelistsResponse, error) {
 // GetWebinarPanelists calls /webinar/panelists using client c
 func (c *Client) GetWebinarPanelists(webinarID int) (GetWebinarPanelistsResponse, error) {
 	var ret = GetWebinarPanelistsResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method: Get,
 		Path:   fmt.Sprintf(GetWebinarPanelistsPath, webinarID),
 		Ret:    &ret,

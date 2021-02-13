@@ -21,7 +21,7 @@ func DeleteMeeting(opts DeleteMeetingOptions) error {
 
 // DeleteMeeting calls DELETE /meetings/{meetingID}
 func (c *Client) DeleteMeeting(opts DeleteMeetingOptions) error {
-	return c.requestV2(requestV2Opts{
+	return c.RequestV2(RequestV2Opts{
 		Method:        Delete,
 		Path:          fmt.Sprintf(DeleteMeetingPath, opts.MeetingID),
 		URLParameters: &opts,

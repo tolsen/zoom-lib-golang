@@ -60,7 +60,7 @@ func ListMeetings(opts ListMeetingsOptions) (ListMeetingsResponse, error) {
 // https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings
 func (c *Client) ListMeetings(opts ListMeetingsOptions) (ListMeetingsResponse, error) {
 	var ret = ListMeetingsResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:        Get,
 		Path:          fmt.Sprintf(ListMeetingsPath, opts.HostID),
 		URLParameters: &opts,

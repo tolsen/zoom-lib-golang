@@ -75,7 +75,7 @@ func RegisterForWebinar(opts WebinarRegistrant) (RegisterForWebinarResponse, err
 // RegisterForWebinar registers a user for a webinar, using client c
 func (c *Client) RegisterForWebinar(opts WebinarRegistrant) (RegisterForWebinarResponse, error) {
 	var ret = RegisterForWebinarResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:         Post,
 		Path:           fmt.Sprintf(RegisterForWebinarPath, opts.WebinarID),
 		URLParameters:  opts,
@@ -110,7 +110,7 @@ func ListWebinarRegistrants(opts ListWebinarRegistrantsOptions) (ListWebinarRegi
 // ListWebinarRegistrants lists webinars using client c
 func (c *Client) ListWebinarRegistrants(opts ListWebinarRegistrantsOptions) (ListWebinarRegistrantsResponse, error) {
 	var ret = ListWebinarRegistrantsResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:        Get,
 		Path:          fmt.Sprintf(RegisterForWebinarPath, opts.WebinarID),
 		URLParameters: opts,

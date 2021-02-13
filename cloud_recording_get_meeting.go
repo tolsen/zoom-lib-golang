@@ -22,7 +22,7 @@ func GetMeetingRecordings(opts GetMeetingRecordingsOptions) (CloudRecordingMeeti
 // GetMeetingRecordings calls /meetings/{meetingId}/recordings endpoint
 func (c *Client) GetMeetingRecordings(opts GetMeetingRecordingsOptions) (CloudRecordingMeeting, error) {
 	var ret = CloudRecordingMeeting{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:        Get,
 		Path:          fmt.Sprintf(GetMeetingRecordingsPath, opts.MeetingID),
 		URLParameters: &opts,

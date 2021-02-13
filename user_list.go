@@ -27,7 +27,7 @@ func ListUsers(opts ListUsersOptions) (ListUsersResponse, error) {
 // ListUsers calls /user/list, listing all users, using client c
 func (c *Client) ListUsers(opts ListUsersOptions) (ListUsersResponse, error) {
 	var ret = ListUsersResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:        Get,
 		Path:          ListUsersPath,
 		URLParameters: opts,

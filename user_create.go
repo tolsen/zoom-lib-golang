@@ -27,7 +27,7 @@ func CreateUser(opts CreateUserOptions) (User, error) {
 // https://marketplace.zoom.us/docs/api-reference/zoom-api/users/usercreate
 func (c *Client) CreateUser(opts CreateUserOptions) (User, error) {
 	var ret = User{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:         Post,
 		Path:           CreateUserPath,
 		DataParameters: &opts,

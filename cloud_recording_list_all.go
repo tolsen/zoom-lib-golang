@@ -56,7 +56,7 @@ func ListAllRecordings(opts ListAllRecordingsOptions) (ListAllRecordingsResponse
 // and gets all cloud recordings for a user, using the c client
 func (c *Client) ListAllRecordings(opts ListAllRecordingsOptions) (ListAllRecordingsResponse, error) {
 	var ret = ListAllRecordingsResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:        Get,
 		Path:          fmt.Sprintf(ListAllRecordingsPath, opts.UserID),
 		URLParameters: &opts,

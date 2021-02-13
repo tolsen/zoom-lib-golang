@@ -28,7 +28,7 @@ func CreateMeeting(opts CreateMeetingOptions) (Meeting, error) {
 // https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate
 func (c *Client) CreateMeeting(opts CreateMeetingOptions) (Meeting, error) {
 	var ret = Meeting{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:         Post,
 		Path:           fmt.Sprintf(CreateMeetingPath, opts.HostID),
 		DataParameters: &opts,

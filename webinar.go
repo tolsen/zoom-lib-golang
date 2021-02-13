@@ -67,7 +67,7 @@ func ListWebinars(opts ListWebinarsOptions) (ListWebinarsResponse, error) {
 // registration, using the client c
 func (c *Client) ListWebinars(opts ListWebinarsOptions) (ListWebinarsResponse, error) {
 	var ret = ListWebinarsResponse{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method:        Get,
 		Path:          fmt.Sprintf(ListWebinarsPath, opts.HostID),
 		URLParameters: &opts,
@@ -83,7 +83,7 @@ func GetWebinarInfo(webinarID int) (Webinar, error) {
 // GetWebinarInfo gets into about a single webinar, using client c
 func (c *Client) GetWebinarInfo(webinarID int) (Webinar, error) {
 	var ret = Webinar{}
-	return ret, c.requestV2(requestV2Opts{
+	return ret, c.RequestV2(RequestV2Opts{
 		Method: Get,
 		Path:   fmt.Sprintf(GetWebinarInfoPath, webinarID),
 		Ret:    &ret,
