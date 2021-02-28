@@ -45,7 +45,7 @@ type (
 		Email              string     `json:"email"`
 		RegistrantId       string     `json:"registrant_id"`
 		AudioQuality       string     `json:"audio_quality"`
-		VideoQuality      string     `json:"video_quality"`
+		VideoQuality       string     `json:"video_quality"`
 		ScreenShareQuality string     `json:"screen_share_quality"`
 
 		// Zoom has disabled the following fields as of 1/31/2021 for privacy reasons
