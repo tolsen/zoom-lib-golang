@@ -145,31 +145,36 @@ func (c *Client) RequestV2(opts RequestV2Opts) error {
 	}
 
 	// execute HTTP request
-	var resp *http.Response
 	var err error
-
 	for _, backoffDuration := range backoffDurations {
+		var resp *http.Response
 		resp, err = c.executeRequest(opts)
-		if err == nil {
-			break
+		if err != nil {
+			if strings.Contains(err.Error(), "GOAWAY") {
+				fmt.Printf("Got GOAWAY. Sleeping %v . err=%v\n", backoffDuration, err)
+				time.Sleep(backoffDuration)
+				continue
+			}
+
+			return err
 		}
-		if strings.Contains(err.Error(), "GOAWAY") {
-			fmt.Printf("Got GOAWAY. Sleeping %v . err=%v\n", backoffDuration, err)
-			time.Sleep(backoffDuration)
-		} else {
+
+		// If there is no body in response
+		if opts.HeadResponse {
+			return c.RequestV2HeadOnly(resp)
+		}
+
+		if err = c.RequestV2WithBody(opts, resp); err != nil {
+			if strings.Contains(err.Error(), "GOAWAY") {
+				fmt.Printf("Got GOAWAY. Sleeping %v . err=%v\n", backoffDuration, err)
+				time.Sleep(backoffDuration)
+				continue
+			}
 			return err
 		}
 	}
-	if err != nil {
-		return err
-	}
 
-	// If there is no body in response
-	if opts.HeadResponse {
-		return c.RequestV2HeadOnly(resp)
-	}
-
-	return c.RequestV2WithBody(opts, resp)
+	return err
 }
 
 func (c *Client) RequestV2WithBody(opts RequestV2Opts, resp *http.Response) error {
