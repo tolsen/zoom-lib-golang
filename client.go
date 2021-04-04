@@ -134,8 +134,30 @@ func (c *Client) RequestV2(opts RequestV2Opts) error {
 	// make sure the defaultClient is not nil if we are using it
 	c = initializeDefault(c)
 
+	var backoffDurations []time.Duration = []time.Duration{
+		time.Minute,
+		5 * time.Minute,
+		10 * time.Minute,
+		40 * time.Minute,
+		90 * time.Minute,
+	}
+
 	// execute HTTP request
-	resp, err := c.executeRequest(opts)
+	var resp *http.Response
+	var err error
+
+	for _, backoffDuration := range backoffDurations {
+		resp, err = c.executeRequest(opts)
+		if err == nil {
+			break
+		}
+		if strings.Contains(err.Error(), "GOAWAY") {
+			fmt.Printf("Got GOAWAY. Sleeping %v . err=%v\n", backoffDuration, err)
+			time.Sleep(backoffDuration)
+		} else {
+			return err
+		}
+	}
 	if err != nil {
 		return err
 	}
