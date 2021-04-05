@@ -172,6 +172,8 @@ func (c *Client) RequestV2(opts RequestV2Opts) error {
 			}
 			return err
 		}
+
+		return nil
 	}
 
 	return err
