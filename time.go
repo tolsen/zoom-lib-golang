@@ -27,12 +27,12 @@ func (t *Time) UnmarshalJSON(b []byte) (err error) {
 // MarshalJSON describes JSON unmarshaling for custom Time objects, handling
 // empty string values
 func (t *Time) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf("\"%s\"", t.Time.Format(time.RFC3339))), nil
+	return []byte(fmt.Sprintf("\"%s\"", t.String())), nil
 }
 
 // Format calls format on the underlying time object
 func (t *Time) Format(format string) string {
-	return t.Time.Format(format)
+	return t.GetTime().Format(format)
 }
 
 // String defines how time is printed out
@@ -41,5 +41,8 @@ func (t *Time) String() string {
 }
 
 func (t *Time) GetTime() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
 	return t.Time
 }
